@@ -12,4 +12,4 @@ export const tabOptions: TabOptions[] = [
 ] as const;
 
 // TypeScript types do not exist at runtime so can't map over them!
-// Had to type assert with an array.
+// Use type assertion with an array.

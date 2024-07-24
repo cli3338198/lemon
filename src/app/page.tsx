@@ -45,11 +45,14 @@ export default function Home() {
         <Tabs activeTab={activeTab} handleTabChange={handleTabChange} />
         <div className="flex flex-col md:flex-row">
           <div className="w-full">
-            <ErrorBoundary>
-              <Suspense fallback={<div>Loading...</div>}>
-                {CurrentView && <CurrentView />}
-              </Suspense>
-            </ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              {/* Adding a unique key prop to the ErrorBoundary forces it to remount when "activeTab" changes. */}
+              {CurrentView && (
+                <ErrorBoundary key={activeTab}>
+                  <CurrentView />
+                </ErrorBoundary>
+              )}
+            </Suspense>
             <div className="flex">
               <Button onClick={runCode}>Run Code</Button>
               <Button onClick={clearConsole}>Clear Console</Button>
