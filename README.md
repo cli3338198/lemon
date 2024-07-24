@@ -12,25 +12,24 @@ Lemons are often associated with something sour or problematic, much like bugs o
 
 ## Features
 
+### Basic
+
 - **Code Editor:** Input, edit and run JavaScript code directly in the browser. Save to your computer.
 - **File Upload:** Upload test files to run Jest tests against the provided code.
 - **Validation and Sanitization:** Ensures that only safe and valid JavaScript code can be executed.
 - **Console Output:** Displays the results of executed code or test outcomes.
 - **Test Coverage:** Shows the test coverage metrics.
+
+### Advanced
+
+- **Themes:** Add themes like dark mode. [PLANNED]
 - **Linting:** Automatic linting. [PLANNED]
+- **Code formatting:** Integrate code formatter. [PLANNED]
 - **React Testing:** Tests React snippets. [PLANNED]
-
-## Getting Started
-
-To run Lemon locally:
-
-1. Clone this repository.
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+- **Enhanced Code Editor:** Add syntax highlighting and autocompletion. [PLANNED]
+- **Keyboard Shortcuts:** Integrate keyboard shortcuts for a more seamless coding experience. [PLANNED]
+- **Performance:** Implement tools to monitor the performance of code execution, helping users optimize their code. Provide detailed logs and reports on execution times and memory usage. [PLANNED]
+- **Documentation/Tutorials:** Create comprehensive documentation and interactive tutorials to help users get started. [PLANNED]
 
 ## Project Wireframe
 
