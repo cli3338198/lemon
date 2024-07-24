@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import { TabOptions, tabOptions } from "./types/types";
+import { useIsolatedVm } from "./hooks/useIsolatedVm";
 
 const CodeEditor = lazy(() => import("./components/CodeEditor"));
 const UploadTest = lazy(() => import("./components/UploadTest"));
@@ -23,6 +24,7 @@ const viewComponents = {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabOptions>(tabOptions[0]);
+  const { result, error, runCode } = useIsolatedVm();
 
   const CurrentView = viewComponents[activeTab] || null;
 
@@ -30,11 +32,13 @@ export default function Home() {
     setActiveTab(tab);
   }
 
-  function runCode() {
-    console.log("run code");
+  function handleRunCode() {
+    // TODO:
+    const code = 'console.log("Hello world!);';
+    runCode(code);
   }
 
-  function clearConsole() {
+  function handleClearConsole() {
     console.log("clear console");
   }
 
@@ -54,11 +58,11 @@ export default function Home() {
               )}
             </Suspense>
             <div className="flex">
-              <Button onClick={runCode}>Run Code</Button>
-              <Button onClick={clearConsole}>Clear Console</Button>
+              <Button onClick={handleRunCode}>Run Code</Button>
+              <Button onClick={handleClearConsole}>Clear Console</Button>
             </div>
             <ErrorBoundary>
-              <Console />
+              <Console result={result} error={error} />
             </ErrorBoundary>
           </div>
         </div>
