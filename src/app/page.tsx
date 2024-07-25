@@ -7,7 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import { TabOptions, tabOptions } from "./types/types";
-import { useIsolatedVm } from "./hooks/useIsolatedVm";
+import { useIVM } from "./hooks/useIVM";
 
 const CodeEditor = lazy(() => import("./components/CodeEditor"));
 const UploadTest = lazy(() => import("./components/UploadTest"));
@@ -24,9 +24,10 @@ const viewComponents = {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabOptions>(tabOptions[0]);
-  const { result, error, runCode } = useIsolatedVm();
-
+  const { result, error, runCode } = useIVM();
   const CurrentView = viewComponents[activeTab] || null;
+
+  console.log({ result });
 
   function handleTabChange(tab: TabOptions) {
     setActiveTab(tab);
@@ -34,8 +35,7 @@ export default function Home() {
 
   function handleRunCode() {
     // TODO:
-    const code = 'console.log("Hello world!);';
-    runCode(code);
+    runCode("const f = (n) => n < 2 ? n : f(n-1) + f(n-2); f(10)");
   }
 
   function handleClearConsole() {
