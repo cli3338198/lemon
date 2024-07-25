@@ -1,12 +1,10 @@
 "use client";
 
+import { forwardRef, useState } from "react";
 import Editor from "@monaco-editor/react";
-import { useState } from "react";
 
-export default function CodeEditor() {
+const CodeEditor = forwardRef(function CodeEditor(props, ref) {
   const [value, setValue] = useState("// your code here!");
-
-  function handleChange() {}
 
   return (
     <div className="w-full h-64 p-2 border">
@@ -14,8 +12,9 @@ export default function CodeEditor() {
         defaultLanguage="javascript"
         defaultValue="// your code here!"
         value={value}
-        onChange={handleChange}
       />
     </div>
   );
-}
+});
+
+export default CodeEditor;

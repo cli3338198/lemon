@@ -2,7 +2,7 @@
 
 ## Purpose and Name Origin
 
-Lemons are often associated with something sour or problematic, much like bugs or errors in code. However, challenging this stereotype, "Lemon" strives to introduce simplicity and freshness into JavaScript testing. "Lemon" is a web application built with Next.js, featuring a code editor and a console. It allows users to input JavaScript code directly or upload files to be tested using Jest. "Lemon" utilizes [BLANK] to prevent malicious code from being executed. The console displays the results of the executed code or tests, along with the test coverage when a test file is uploaded. "Lemon" provides a convenient platform for testing JavaScript code snippets and files using Jest within a Next.js environment.
+Lemons are often associated with something sour or problematic, much like bugs or errors in code. However, challenging this stereotype, "Lemon" strives to introduce simplicity and freshness into JavaScript testing. "Lemon" is a web application built with Next.js, featuring a code editor and a console. It allows users to input JavaScript code directly or upload files to be tested using Jest. "Lemon" utilizes isolated-vm to prevent malicious code from being executed. The console displays the results of the executed code or tests, along with the test coverage when a test file is uploaded. "Lemon" provides a convenient platform for testing JavaScript code snippets and files using Jest within a Next.js environment.
 
 ## Technologies Used
 

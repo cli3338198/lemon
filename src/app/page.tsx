@@ -1,7 +1,7 @@
 "use client";
 
 // Standard library imports
-import { useState, lazy, Suspense } from "react";
+import { useState, useRef, lazy, Suspense } from "react";
 
 // Third-party library imports (if any)
 // import axios from "axios";  // Example of a third-party library
@@ -38,9 +38,8 @@ const viewComponents = {
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabOptions>(tabOptions[0]);
   const { result, error, runCode, resetCode } = useIVM();
+  const editorRef = useRef(null);
   const CurrentView = viewComponents[activeTab] || null;
-
-  console.log({ result });
 
   function handleTabChange(tab: TabOptions) {
     setActiveTab(tab);
@@ -73,8 +72,8 @@ export default function Home() {
               )}
             </Suspense>
             <div className="flex">
-              <Button onClick={handleRunCode}>Run Code</Button>
-              <Button onClick={handleClearConsole}>Clear Console</Button>
+              <Button onClick={handleRunCode}>Run</Button>
+              <Button onClick={handleClearConsole}>Clear</Button>
             </div>
             <ErrorBoundary>
               <Console result={result} error={error} />
