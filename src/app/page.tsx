@@ -1,13 +1,26 @@
 "use client";
 
+// Standard library imports
 import { useState, lazy, Suspense } from "react";
+
+// Third-party library imports (if any)
+// import axios from "axios";  // Example of a third-party library
+
+// Absolute imports (if using)
+// import Button from "components/Button"; // Example of an absolute import
+
+// Relative imports: components
 import Button from "./components/Button";
 import Console from "./components/Console";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
-import { TabOptions, tabOptions } from "./types/types";
+
+// Relative imports: hooks
 import { useIVM } from "./hooks/useIVM";
+
+// Relative imports: types and constants
+import { TabOptions, tabOptions } from "./types/types";
 
 const CodeEditor = lazy(() => import("./components/CodeEditor"));
 const UploadTest = lazy(() => import("./components/UploadTest"));
@@ -24,7 +37,7 @@ const viewComponents = {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabOptions>(tabOptions[0]);
-  const { result, error, runCode } = useIVM();
+  const { result, error, runCode, resetCode } = useIVM();
   const CurrentView = viewComponents[activeTab] || null;
 
   console.log({ result });
@@ -34,12 +47,14 @@ export default function Home() {
   }
 
   function handleRunCode() {
+    resetCode();
     // TODO:
     runCode("const f = (n) => n < 2 ? n : f(n-1) + f(n-2); f(10)");
   }
 
   function handleClearConsole() {
     console.log("clear console");
+    resetCode();
   }
 
   return (

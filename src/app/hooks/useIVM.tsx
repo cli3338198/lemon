@@ -27,9 +27,15 @@ export function useIVM() {
     }
   }
 
+  function resetCode() {
+    setResult(null);
+    setError(null);
+  }
+
   return {
     result,
     error,
     runCode,
+    resetCode,
   };
 }
