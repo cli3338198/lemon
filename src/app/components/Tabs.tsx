@@ -1,4 +1,4 @@
-import { TabOptions, tabOptions } from "../types/types";
+import { TabOptions, tabOptions } from "../types/tabs";
 
 type Props = {
   activeTab: TabOptions;

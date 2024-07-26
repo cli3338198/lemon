@@ -18,9 +18,10 @@ import Tabs from "./components/Tabs";
 
 // Relative imports: hooks
 import { useIVM } from "./hooks/useIVM";
+import { CodeEditorHandle } from "./components/CodeEditor";
 
 // Relative imports: types and constants
-import { TabOptions, tabOptions } from "./types/types";
+import { TabOptions, tabOptions } from "./types/tabs";
 
 const CodeEditor = lazy(() => import("./components/CodeEditor"));
 const UploadTest = lazy(() => import("./components/UploadTest"));
@@ -38,7 +39,7 @@ const viewComponents = {
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabOptions>(tabOptions[0]);
   const { result, error, runCode, resetCode } = useIVM();
-  const editorRef = useRef(null);
+  const editorRef = useRef<CodeEditorHandle | null>(null);
   const CurrentView = viewComponents[activeTab] || null;
 
   function handleTabChange(tab: TabOptions) {
@@ -48,7 +49,11 @@ export default function Home() {
   function handleRunCode() {
     resetCode();
     // TODO:
-    runCode("const f = (n) => n < 2 ? n : f(n-1) + f(n-2); f(10)");
+    // runCode("const f = (n) => n < 2 ? n : f(n-1) + f(n-2); f(10)");
+    if (editorRef.current) {
+      const code = editorRef.current.getValue();
+      runCode(code);
+    }
   }
 
   function handleClearConsole() {
@@ -67,7 +72,11 @@ export default function Home() {
               {/* Adding a unique key prop to the ErrorBoundary forces it to remount when "activeTab" changes. */}
               {CurrentView && (
                 <ErrorBoundary key={activeTab}>
-                  <CurrentView />
+                  {activeTab === tabOptions[0] ? (
+                    <CurrentView ref={editorRef} />
+                  ) : (
+                    <CurrentView />
+                  )}
                 </ErrorBoundary>
               )}
             </Suspense>
