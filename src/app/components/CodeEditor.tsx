@@ -1,5 +1,3 @@
-"use client";
-
 import { forwardRef, useState, useRef, useImperativeHandle } from "react";
 import Editor from "@monaco-editor/react";
 import { editor as MonacoEditor } from "monaco-editor";
@@ -37,7 +35,7 @@ const CodeEditor = forwardRef<CodeEditorHandle | null, Props>(
     }
 
     return (
-      <div className="w-full h-64 p-2 border">
+      <div className="w-full h-64 p-2 bg-black border border-green-500 text-green-500">
         <Editor
           defaultLanguage="javascript"
           defaultValue="// your code here!"
