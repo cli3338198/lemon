@@ -48,8 +48,6 @@ export default function Home() {
 
   function handleRunCode() {
     resetCode();
-    // TODO:
-    // runCode("const f = (n) => n < 2 ? n : f(n-1) + f(n-2); f(10)");
     if (editorRef.current) {
       const code = editorRef.current.getValue();
       runCode(code);

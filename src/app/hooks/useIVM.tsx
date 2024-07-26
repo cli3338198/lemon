@@ -5,6 +5,7 @@ export function useIVM() {
   const [error, setError] = useState<string | null>(null); // TODO:
 
   async function runCode(code: string) {
+    console.log({ code });
     try {
       const response = await fetch("/api/runCode", {
         method: "POST",
@@ -14,6 +15,7 @@ export function useIVM() {
         body: JSON.stringify({ code }),
       });
       const data = await response.json();
+      console.log({ result: data.result });
       if (response.ok) {
         setResult(data.result);
         setError(null);
