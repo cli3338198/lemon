@@ -10,8 +10,10 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     const context = isolate.createContextSync();
     const script = isolate.compileScriptSync(code);
     const result = script.runSync(context);
+
     res.status(200).json({ result });
   } catch (err: unknown) {
+    console.log({ err });
     const { message: errorMessage } = err as Error;
     const message = parseVMErrorMessage(errorMessage);
     res.status(500).json({ error: message });
