@@ -1,3 +1,4 @@
+import { parseVMErrorMessage } from "@/utils/isolatedVMUtils";
 import { NextApiRequest, NextApiResponse } from "next";
 // This hack works!
 const ivm = eval("require")("isolated-vm");
@@ -11,6 +12,8 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     const result = script.runSync(context);
     res.status(200).json({ result });
   } catch (err: unknown) {
-    res.status(500).json({ error: "Something went wrong" });
+    const { message: errorMessage } = err as Error;
+    const message = parseVMErrorMessage(errorMessage);
+    res.status(500).json({ error: message });
   }
 }
