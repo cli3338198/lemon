@@ -16,56 +16,6 @@
   }
 }
 
-/* Disable text selection globally */
-body,
-button,
-input,
-textarea {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
-}
-
-/* TODO:  fix this cursor */
-
-* {
-  cursor: url("./public/images/cursor-arrow.png"), auto;
-}
-
-/* Disable right-click globally */
-body {
-  -webkit-touch-callout: none; /* iOS Safari */
-}
-
-body,
-button,
-input,
-textarea,
-a,
-* {
-  cursor: default; /* Sets the default arrow cursor */
-}
-
-/* Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
-}
-
-::-webkit-scrollbar-track {
-  background: #000; /* Track color (dark background) */
-}
-
-::-webkit-scrollbar-thumb {
-  background: #0f0; /* Handle color (green) */
-  border: 2px solid #000; /* Border around the handle */
-  border-radius: 4px; /* Rounded corners for the handle */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #0c0; /* Slightly lighter green on hover */
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -74,22 +24,6 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  /* Disable right-click and context menu globally */
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
-}
-
-header pre {
-  color: #0f0; /* Neon green text */
-  text-shadow: 0 0 5px #0f0; /* Neon glow effect */
-}
-
-header h2 {
-  color: #0f0; /* Neon green text */
-  text-shadow: 0 0 5px #0f0; /* Neon glow effect */
 }
 
 @layer utilities {

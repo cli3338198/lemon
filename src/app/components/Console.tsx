@@ -14,12 +14,12 @@ export default function Console({ result, error }: Props) {
   console.log({ content }, typeof content);
 
   return (
-    <div className="w-full h-32 p-2 bg-black text-green-500 border border-green-500">
+    <div className="w-full h-32 p-4 bg-gray-800 text-white border border-gray-700 rounded-md overflow-auto">
       {content
         ? String(content)
             .split("\n")
             .map((line, index) => <div key={index}>{line}</div>)
-        : ""}
+        : "No output"}
     </div>
   );
 }

@@ -15,13 +15,7 @@ const CodeEditor = forwardRef<CodeEditorHandle | null, Props>(
     const editorRef = useRef<MonacoEditor.IStandaloneCodeEditor | null>(null);
 
     useImperativeHandle(ref, () => ({
-      getValue: () => {
-        if (editorRef.current) {
-          return editorRef.current.getValue();
-        } else {
-          return "";
-        }
-      },
+      getValue: () => editorRef.current?.getValue() || "",
       setValue: (newValue: string) => {
         if (editorRef.current) {
           editorRef.current.setValue(newValue);
@@ -35,12 +29,12 @@ const CodeEditor = forwardRef<CodeEditorHandle | null, Props>(
     }
 
     return (
-      <div className="w-full h-64 p-2 bg-black border border-green-500 text-green-500">
+      <div className="w-full h-64 p-4 bg-white border rounded-md shadow-md">
         <Editor
           defaultLanguage="javascript"
           defaultValue="// your code here!"
           value={value}
-          theme="vs-dark"
+          theme="vs-light"
           onMount={onMount}
         />
       </div>
