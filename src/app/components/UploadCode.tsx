@@ -5,7 +5,7 @@ export default function UploadCode() {
     <div className="w-full h-64 p-4 bg-white border rounded-md shadow-md text-gray-800 flex flex-col gap-4">
       <h3 className="text-xl font-semibold">Upload Your Code</h3>
       <p className="text-gray-600">
-        Upload your code file here. Supported formats include .js, .ts, and .py.
+        Upload your code file here. Supported formats include .js.
       </p>
       <input
         type="file"
