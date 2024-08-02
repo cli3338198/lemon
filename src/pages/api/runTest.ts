@@ -27,26 +27,40 @@ export default async function GET(req: NextApiRequest, res: NextApiResponse) {
     fs.mkdirSync(tempDir);
   }
 
+  // Create the coverage folder if it doesn't exist
+  const coverageDir = path.join(process.cwd(), "temp", "coverage");
+  if (!fs.existsSync(coverageDir)) {
+    fs.mkdirSync(coverageDir);
+  }
+
   // Create test/code file and run test TODO: refactor this
   const testTemplate = createTestTemplate(code, test);
   const testFilePath = path.join(process.cwd(), "temp", "userTest.test.js");
   fs.writeFileSync(testFilePath, testTemplate);
 
   try {
-    const result = execSync(
-      `jest temp --coverage --json --outputFile=temp/result.json`
+    execSync(
+      `jest temp --coverage --coverageReporters="json-summary" --coverageDirectory=${coverageDir} --json --outputFile=${tempDir}/result.json`
     );
     const testResults = JSON.parse(
       fs.readFileSync("temp/result.json", "utf-8")
     );
-    console.log({ testResults }); // TODO: remove
+
+    const coverageSummaryPath = path.join(coverageDir, "coverage-summary.json");
+    const coverageSummary = JSON.parse(
+      fs.readFileSync(coverageSummaryPath, "utf-8")
+    );
+
+    console.log("Coverage Summary:", coverageSummary);
+
+    // console.log({ testResults }); // TODO: remove
     res.status(200).json({ success: true, results: testResults });
   } catch (err: unknown) {
     const { message } = err as Error;
     res.status(500).json({ success: false, error: message });
   } finally {
     // Remove files TODO: refactor
-    fs.unlinkSync(testFilePath);
-    fs.unlinkSync("temp/result.json");
+    // fs.unlinkSync(testFilePath);
+    // fs.unlinkSync("temp/result.json");
   }
 }
