@@ -8,17 +8,25 @@ export default async function GET(req: NextApiRequest, res: NextApiResponse) {
   // const { test, code } = req.body;
 
   const code = `
-    const fib = (n) => n < 2 ? n : fib(n-1) + fib(n-2);
+    const sum = (a, b) => {
+      return a + b;
+    };
+
+    const fib = (n, memo={}) => {
+      if (n < 2) return n;
+      if (n in memo) return memo[n];
+      return memo[n] = fib(n-1, memo) + fib(n-2, memo);
+    };
   `;
 
   const test = `
     test('fib(1) => 1', () => {
-      expect(fib(1)).toBe(1)
-    })
+      expect(fib(1)).toBe(1);
+    });
 
-    test('fib(10) => 1', () => {
-      expect(fib(10)).toBe(55)
-    })
+    test('fib(10) => 55', () => {
+      expect(fib(10)).toBe(55);
+    });
   `;
 
   // Create the temp folder if it doesn't exist
@@ -39,19 +47,34 @@ export default async function GET(req: NextApiRequest, res: NextApiResponse) {
   fs.writeFileSync(testFilePath, testTemplate);
 
   try {
+    const coverageSummaryPath = path.join(
+      tempDir,
+      "coverage",
+      "coverage-summary.json"
+    );
+
+    if (fs.existsSync(coverageSummaryPath)) {
+      const coverageSummary = JSON.parse(
+        fs.readFileSync(coverageSummaryPath, "utf-8")
+      );
+      console.log("Coverage Summary:", coverageSummary);
+    } else {
+      console.log("Coverage summary file not found.");
+    }
+
     execSync(
-      `jest temp --coverage --coverageReporters="json-summary" --coverageDirectory=${coverageDir} --json --outputFile=${tempDir}/result.json`
+      `jest temp --verbose --coverage --coverageReporters="json-summary" --coverageDirectory=${coverageDir} --json --outputFile=${tempDir}/result.json`
     );
     const testResults = JSON.parse(
       fs.readFileSync("temp/result.json", "utf-8")
     );
 
-    const coverageSummaryPath = path.join(coverageDir, "coverage-summary.json");
-    const coverageSummary = JSON.parse(
-      fs.readFileSync(coverageSummaryPath, "utf-8")
-    );
+    // const coverageSummaryPath = path.join(coverageDir, "coverage-summary.json");
+    // const coverageSummary = JSON.parse(
+    //   fs.readFileSync(coverageSummaryPath, "utf-8")
+    // );
 
-    console.log("Coverage Summary:", coverageSummary);
+    // console.log("Coverage Summary:", coverageSummary);
 
     // console.log({ testResults }); // TODO: remove
     res.status(200).json({ success: true, results: testResults });

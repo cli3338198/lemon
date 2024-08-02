@@ -1,7 +1,7 @@
 export default function createTestTemplate(code: string, test: string) {
   return `
-    ${code}
+  ${code}
 
-    ${test}
+  ${test}
   `;
 }
