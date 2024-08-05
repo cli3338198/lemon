@@ -32,6 +32,7 @@ Lemons are often associated with something sour or problematic, much like bugs o
 - **Keyboard Shortcuts:** Integrate keyboard shortcuts for a more seamless coding experience. [PLANNED]
 - **Performance:** Implement tools to monitor the performance of code execution, helping users optimize their code. Provide detailed logs and reports on execution times and memory usage. [PLANNED]
 - **Documentation/Tutorials:** Create comprehensive documentation and interactive tutorials to help users get started. [PLANNED]
+- **Multiple Function Calls in Isolates:** Allow users to make multiple function calls and output them all to the console. Each function call will run in a unique "isolate" provided by `isolated-vm`, ensuring that each execution is secure and independent. This feature facilitates running and managing multiple functions concurrently, with clear separation between their execution contexts. [PLANNED]
 
 ## Project Wireframe
 
